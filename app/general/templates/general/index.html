@@ -1,23 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Flask App with Tailwind CSS</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="container mx-auto mt-10">
-      <h1 class="text-3xl font-bold text-center mb-5">
-        Welcome to Your Flask App with Tailwind CSS
-      </h1>
-      <p class="text-center text-gray-600">
-        This is a sample Flask app styled with Tailwind CSS.
-      </p>
+{% extends "bootstrap/base.html" %} {% block title %}My Flask App with
+Bootstrap{% endblock %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('general_bp.static', filename='styles/index.css') }}"
+/>
+{% endblock %} {% block content %}
+
+<div>
+  <div class="container-fluid">
+    <div class="d-flex">
+      <h1>Welcome to Our Online Shop!</h1>
     </div>
-    <script src="{{ url_for('general_bp.static', filename='scripts/app.js') }}"></script>
-  </body>
-</html>
+  </div>
+  <div id="container">
+    <div class="row card-container">
+      {% for product in products %}
+      <div
+        class="col-md-3 col-sm-6 col-xs-12 single-card"
+        data-product-id="{{ product['id'] }}"
+      >
+        <img
+          class="image"
+          src="{{product['picture_url']}}"
+          alt="{{ product['name'] }}"
+        />
+        <p class="lead lead-text text-center">
+          {{ product['name'] }} - ${{ product['price'] }}
+        </p>
+        <p class="text-center">
+          Environmental Impact: {{ product['environmental_impact'] }}
+        </p>
+        <div class="btn-container">
+          <button
+            type="button"
+            class="btn-primary btn button"
+            onclick="addToCart({{ product['id'] }})"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="{{ url_for('general_bp.static', filename='scripts/index.js') }}"></script>
+</div>
+{% endblock %}
