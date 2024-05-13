@@ -1,19 +1,3 @@
-function addToCart(itemId) {
-  console.log({ itemId });
-  //   fetch("/add_to_cart", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ item_id: itemId }),
-  //   }).then((response) => {
-  //     if (response.ok) {
-  //       alert("Item added to cart!");
-  //     } else {
-  //       alert("Failed to add item to cart.");
-  //     }
-  //   });
-  console.log("Javascript");
-}
-
 $(document).ready(function () {
   $(".single-card").hover(
     function () {
@@ -40,4 +24,55 @@ $(document).ready(function () {
       $(this).find(".product-description").remove();
     }
   );
+
+  function loadItems(sortBy) {
+    $.ajax({
+      url: `/products/sort_items/${sortBy}`,
+      method: "GET",
+      success: function (response) {
+        $("#items-container").empty();
+
+        response.forEach(function (product) {
+          var itemHtml = `
+              <div class="col-md-3 col-sm-6 col-xs-12 single-card" data-product-id="${product.id}">
+                <a href="products/single/${product.id}">
+                  <img class='image' src="${product.picture_url}" alt="${product.name}" />
+                </a>
+                <p class="lead lead-text text-center">${product.name} - $${product.price}</p>
+                <p class="text-center">Environmental Impact: ${product.environmental_impact}</p>
+                <div class="btn-container">
+                  <button type="button" class="btn-primary btn button" onclick="addToCart(${product.id})">Add to Cart</button>
+                </div>
+              </div>
+          `;
+
+          $("#items-container").append(itemHtml);
+        });
+      },
+      error: function (err) {
+        console.error("Error loading sorted items:", err);
+      },
+    });
+  }
+
+  $("#sort-by").change(function () {
+    var sortBy = $(this).val();
+    loadItems(sortBy);
+  });
+
+  loadItems("name");
 });
+
+function addToCart(productId) {
+  $.ajax({
+    url: `/cart/add/${productId}`,
+    method: "POST",
+    success: function (response) {
+      console.log("Item added to cart:", response);
+      alert(`Product with id ${productId} added to cart`);
+    },
+    error: function (err) {
+      console.error("Error adding item to cart:", err);
+    },
+  });
+}

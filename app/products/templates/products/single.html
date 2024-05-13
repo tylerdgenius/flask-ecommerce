@@ -1,0 +1,22 @@
+{% extends "bootstrap/base.html" %} {% block title %} Single Product {% endblock
+%} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('products_bp.static', filename='styles/index.css') }}"
+/>
+{% endblock %} {% block content %}
+<h1>{{ product.name }}</h1>
+<img class="image" src="{{ product.picture_url }}" alt="{{ product.name }}" />
+<p class="lead">Description: {{ product.description }}</p>
+<p>Price: ${{ product.price }}</p>
+<p>Environmental Impact: {{ product.environmental_impact }}</p>
+<div class="btn-container">
+  <button
+    type="button"
+    class="btn-primary btn button"
+    onclick="addToCart({{ product.id }})"
+  >
+    Add to Cart
+  </button>
+</div>
+{% endblock %}

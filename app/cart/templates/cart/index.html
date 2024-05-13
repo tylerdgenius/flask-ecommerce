@@ -1,0 +1,23 @@
+{% extends "bootstrap/base.html" %} {% block title %}My Flask App with
+Bootstrap{% endblock %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('cart_bp.static', filename='styles/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('general_bp.static', filename='styles/nav.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('general_bp.static', filename='styles/index.css') }}"
+/>
+{% endblock %} {% block navbar %} {% include "general/nav.html" %} {% endblock
+%} {% block content %}
+<div>
+  <div id="cart-contents"></div>
+</div>
+{% endblock %} {% block scripts %} {{super()}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ url_for('cart_bp.static', filename='scripts/index.js') }}"></script>
+{% endblock %}
