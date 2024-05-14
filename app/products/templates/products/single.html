@@ -4,7 +4,12 @@
   rel="stylesheet"
   href="{{ url_for('products_bp.static', filename='styles/index.css') }}"
 />
-{% endblock %} {% block content %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('general_bp.static', filename='styles/nav.css') }}"
+/>
+{% endblock %} {% block navbar %} {% include "general/nav.html" %} {% endblock
+%}{% block content %}
 <h1>{{ product.name }}</h1>
 <img class="image" src="{{ product.picture_url }}" alt="{{ product.name }}" />
 <p class="lead">Description: {{ product.description }}</p>
@@ -19,4 +24,5 @@
     Add to Cart
   </button>
 </div>
+<script src="{{ url_for('general_bp.static', filename='scripts/index.js') }}"></script>
 {% endblock %}

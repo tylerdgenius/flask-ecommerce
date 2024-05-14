@@ -11,10 +11,5 @@
     >
       <a href="{{ url_for('cart_bp.index') }}">Cart</a>
     </li>
-    <li
-      class="lead {% if request.path == url_for('products_bp.index') %}active{% endif %}"
-    >
-      <a href="{{ url_for('products_bp.index') }}">Products</a>
-    </li>
   </ul>
 </nav>
