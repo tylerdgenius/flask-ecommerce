@@ -47,6 +47,17 @@ Bootstrap{% endblock %} {% block styles %} {{ super() }}
           Environmental Impact: {{product.environmental_impact}}
         </p>
         <div class="btn-container">
+          {% if product.is_in_cart == True %}
+          <button
+            type="button"
+            class="btn-primary btn button"
+            onclick="removeFromCart({{product.id}})"
+          >
+            Remove from Cart
+          </button>
+          {% endif %}
+
+          {% if product.is_in_cart == False %}
           <button
             type="button"
             class="btn-primary btn button"
@@ -54,6 +65,7 @@ Bootstrap{% endblock %} {% block styles %} {{ super() }}
           >
             Add to Cart
           </button>
+          {% endif %}
         </div>
       </div>
       {% endfor %}
@@ -61,5 +73,6 @@ Bootstrap{% endblock %} {% block styles %} {{ super() }}
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{ url_for('general_bp.static', filename='scripts/index.js') }}"></script>
+  <script src="{{ url_for('cart_bp.static', filename='scripts/index.js') }}"></script>
 </div>
 {% endblock %}

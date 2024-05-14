@@ -13,3 +13,18 @@ function removeFromCart(productId) {
     },
   });
 }
+
+function clearItems() {
+  $.ajax({
+    url: `/cart/clear`,
+    method: "POST",
+    success: function (response) {
+      alert(`Cleared products from cart`);
+      window.location.reload();
+    },
+    error: function (err) {
+      console.error("Error clearing cart:", err);
+      alert(`Error clearing cart: ${err}`);
+    },
+  });
+}

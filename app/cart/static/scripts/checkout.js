@@ -49,9 +49,26 @@ function submitForm() {
     .then((data) => {
       console.log(data);
       alert("Checkout successful!");
+      clearItems();
+      window.location.href = "/";
     })
     .catch((error) => {
       console.error("Error:", error);
       alert("Checkout failed. Please try again.");
     });
+}
+
+function clearItems() {
+  $.ajax({
+    url: `/cart/clear`,
+    method: "POST",
+    success: function (response) {
+      alert(`Cleared products from cart. Redirect...`);
+      window.location.href = "/";
+    },
+    error: function (err) {
+      console.error("Error clearing cart:", err);
+      alert(`Error clearing cart: ${err}`);
+    },
+  });
 }

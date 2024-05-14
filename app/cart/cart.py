@@ -8,7 +8,7 @@ cart_bp = Blueprint("cart_bp", __name__, template_folder='templates', static_fol
 def index():
     count = 0
     if 'cart' in session:
-        count = len(session)
+        count = len(session['cart'])
 
     cart_details, total_cost = get_cart_products(session=session)
 
@@ -45,6 +45,11 @@ def checkout():
 
     return render_template('cart/checkout.html', products=cart_details, total=total_cost)
 
+@cart_bp.route('/clear', methods=['POST'])
+def clear_cart():
+    session['cart'] = []
+    return jsonify({"message": "Cleared all items in cart"})
+
 @cart_bp.route('/add/<int:product_id>', methods=['POST'])
 def add_to_cart(product_id):
     if 'cart' not in session:
@@ -54,6 +59,7 @@ def add_to_cart(product_id):
         return jsonify({"message": "Item already in cart"}), 500
     
     session['cart'].append(product_id)
+    session.modified = True
     print(session['cart'])
     return jsonify({'message': 'Item added to cart'})
 
@@ -64,6 +70,7 @@ def remove_from_cart(product_id):
     print(session['cart'], product_id)
     if product_id in session['cart']:
         session['cart'].remove(product_id)
+        session.modified = True
         return jsonify({'message': f'Item {product_id} removed from cart'})
     else:
         return jsonify({'message': f'Item {product_id} not found in cart'}), 404

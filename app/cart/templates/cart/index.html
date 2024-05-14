@@ -16,11 +16,23 @@ Bootstrap{% endblock %} {% block styles %} {{ super() }}
 %} {% block content %}
 <div>
   <div class="top-section">
-    <h1>Your cart - {{count}} items</h1>
+    <div class="cart-title">
+      <h1>Your cart - {{count}} items</h1>
+      {% if count > 0 %}
+      <a onclick="clearItems()">Clear Items</a>
+      {% endif %}
+    </div>
+    {% if count > 0 %}
     <a href="{{ url_for('cart_bp.checkout') }}" class="btn btn-danger"
       >Checkout</a
-    >
+    >{% endif %}
   </div>
+  {% if count == 0 %}
+  <div class="empty-product">
+    <p>You currently have no products in your cart</p>
+    <a href="/"> Add product </a>
+  </div>
+  {% endif %}
   <div id="cart-contents">
     {% for product in products %}
     <div

@@ -48,6 +48,7 @@ function addToCart(productId) {
     success: function (response) {
       console.log("Item added to cart:", response);
       alert(`Product with id ${productId} added to cart`);
+      window.location.reload();
     },
     error: function (err) {
       if (err.responseJSON.message) {

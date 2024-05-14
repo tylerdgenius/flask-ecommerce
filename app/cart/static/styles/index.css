@@ -87,3 +87,7 @@
   color: #777;
   font-weight: bold;
 }
+
+.empty-product {
+  padding: 0px 24px;
+}

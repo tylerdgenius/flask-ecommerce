@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session, jsonify
 from app.products.model import Product
 
 general_bp = Blueprint("general_bp", __name__, template_folder='templates', static_folder='static')
@@ -22,7 +22,8 @@ def index():
         'description': product.description,
         'picture_url': product.picture_url,
         'price': product.price,
-        'environmental_impact': product.environmental_impact
+        'environmental_impact': product.environmental_impact,
+        'is_in_cart': (True if ('cart' in session and product.id in session['cart']) else False)
     } for product in sorted_products]
 
     return render_template('general/index.html', products=sorted_products_data, default_sort_by=sort_by)
