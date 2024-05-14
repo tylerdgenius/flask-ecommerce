@@ -72,7 +72,11 @@ function addToCart(productId) {
       alert(`Product with id ${productId} added to cart`);
     },
     error: function (err) {
-      console.error("Error adding item to cart:", err);
+      if (err.responseJSON.message) {
+        return alert(`Error: ${err.responseJSON.message}`);
+      }
+
+      return alert(`Error adding item to cart: ${err}`);
     },
   });
 }

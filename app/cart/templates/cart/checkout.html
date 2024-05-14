@@ -1,0 +1,94 @@
+{% extends "bootstrap/base.html" %} {% block title %}My Flask App with
+Bootstrap{% endblock %} {% block styles %} {{ super() }}
+<link
+  rel="stylesheet"
+  href="{{ url_for('cart_bp.static', filename='styles/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('general_bp.static', filename='styles/nav.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('general_bp.static', filename='styles/index.css') }}"
+/>
+{% endblock %} {% block navbar %} {% include "general/nav.html" %} {% endblock
+%} {% block content %}
+<div>
+  <div class="top-section">
+    <h1>Checkout</h1>
+  </div>
+  <div id="checkout-contents" class="row d-flex checkout-contents">
+    <div class="col-md-6 left-checkout">
+        <p>Item List</p>
+        <hr />
+        {% for product in products %}
+        <div class="checkout">
+            <div class="checkout-name">
+                <img 
+                    class="side-image"
+                    src="{{ product.picture_url }}"
+                    alt="{{ product.name }}" 
+                />
+                <p class="lead">{{product.name}}</p>
+            </div>
+            <p class="lead">${{product.price}}</p>
+        </div>
+        <hr />
+        {% endfor %}
+        <div class="total">
+            <p>Total</p>
+            <p class="lead">${{ total }}</p>
+        </div>
+    </div>
+    <div class="col-md-6 right-checkout">
+      <div class="payment-system">
+        <div>
+          <label for="credit-card">Credit Card Number:</label>
+          <input
+            type="text"
+            id="credit-card"
+            name="credit_card"
+            placeholder="Enter 16-digit card number"
+            required
+          />
+        </div>
+        <div>
+          <label for="name">Name on Card:</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            placeholder="Enter name"
+            required
+          />
+        </div>
+        <div>
+          <label for="expiration">Expiration Date:</label>
+          <input
+            type="text"
+            id="expiration"
+            name="expiration"
+            placeholder="MM/YYYY"
+            required
+          />
+        </div>
+        <div>
+          <label for="cvv">CVV:</label>
+          <input
+            type="text"
+            id="cvv"
+            name="cvv"
+            placeholder="Enter CVV"
+            required
+          />
+        </div>
+        <button type="submit" onclick="submitForm()" class="btn btn-danger">Pay Now</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block scripts %} {{super()}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{url_for("cart_bp.static", filename='scripts/checkout.js')}}"></script>
+{% endblock %}

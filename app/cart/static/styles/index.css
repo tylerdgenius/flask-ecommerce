@@ -1,0 +1,89 @@
+.top-section {
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.left-checkout {
+}
+
+.checkout-contents {
+  padding: 12px 30px;
+}
+
+.right-checkout {
+  padding: 12px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.payment-system {
+  background-color: #f7f7f7;
+  border: 1px solid #e7e7e7;
+  padding: 5rem;
+  border-radius: 8px;
+  width: 500px;
+}
+
+.payment-system :nth-child(1) {
+  display: block;
+  margin-bottom: 12px;
+  margin-top: 8px;
+}
+
+.payment-system div label {
+  margin: 0px;
+}
+
+.payment-system div input {
+  width: 100%;
+  border: none;
+  background-color: white;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.payment-system button {
+  margin-top: 16px;
+}
+
+.d-flex {
+  display: flex;
+}
+.side-image {
+  height: 45px;
+  width: 45px;
+  border-radius: 8px;
+}
+
+.checkout-name {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.checkout {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.checkout p {
+  margin: 0px;
+}
+
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.total p {
+  margin: 0;
+  font-size: 3rem;
+  color: #777;
+  font-weight: bold;
+}

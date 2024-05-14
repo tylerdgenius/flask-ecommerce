@@ -13,19 +13,19 @@ Bootstrap{% endblock %} {% block styles %} {{ super() }}
 
 <div>
   <div class="container-fluid">
-    <div class="d-flex">
+    <div class="d-flex title-section">
       <h1>Welcome to Our Online Shop!</h1>
+      <div class="sort-controls sort-controller">
+        <label for="sort-by" class="lead">Sort by:</label>
+        <select id="sort-by">
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+          <option value="environmental_impact">Environmental Impact</option>
+        </select>
+      </div>
     </div>
   </div>
   <div id="container">
-    <div class="sort-controls">
-      <label for="sort-by">Sort by:</label>
-      <select id="sort-by">
-        <option value="name">Name</option>
-        <option value="price">Price</option>
-        <option value="environmental_impact">Environmental Impact</option>
-      </select>
-    </div>
     <div class="row card-container" id="items-container"></div>
   </div>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

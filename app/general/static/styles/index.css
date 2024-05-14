@@ -36,3 +36,19 @@
   border-radius: 8px;
   z-index: 999;
 }
+
+.title-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sort-controller {
+  display: flex;
+  flex-direction: column;
+}
+
+.sort-controller label {
+  margin: 0px 4px 0px 0px;
+  font-size: 14px;
+}

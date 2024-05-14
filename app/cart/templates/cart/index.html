@@ -15,7 +15,45 @@ Bootstrap{% endblock %} {% block styles %} {{ super() }}
 {% endblock %} {% block navbar %} {% include "general/nav.html" %} {% endblock
 %} {% block content %}
 <div>
-  <div id="cart-contents"></div>
+  <div class="top-section">
+    <h1>Your cart - {{count}} items</h1>
+    <a href="{{ url_for('cart_bp.checkout') }}" class="btn btn-danger"
+      >Checkout</a
+    >
+  </div>
+  <div id="cart-contents">
+    {% for product in products %}
+    <div
+      class="col-md-3 col-sm-6 col-xs-12 single-card"
+      data-product-id="{{ product.id }}"
+    >
+      <a
+        href="{{ url_for('products_bp.view_product', product_id=product.id) }}"
+      >
+        <img
+          class="image"
+          src="{{ product.picture_url }}"
+          alt="{{ product.name }}"
+        />
+      </a>
+      <p class="lead lead-text text-center">
+        {{ product.name }} - ${{ product.price }}
+      </p>
+      <p class="text-center">
+        Environmental Impact: {{ product.environmental_impact }}
+      </p>
+      <div class="btn-container">
+        <button
+          type="button"
+          class="btn-primary btn button"
+          onclick="removeFromCart({{ product.id }})"
+        >
+          Remove from Cart
+        </button>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
 </div>
 {% endblock %} {% block scripts %} {{super()}}
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

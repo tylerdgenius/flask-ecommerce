@@ -1,1 +1,1 @@
-from .get_products_by_ids import get_products_by_ids
+from .get_products_by_ids import get_products_by_ids, get_cart_products
